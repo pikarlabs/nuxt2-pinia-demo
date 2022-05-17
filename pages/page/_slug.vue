@@ -37,6 +37,7 @@ export default {
   //   }
   // }
   async fetch () {
+    console.log('====================')
     const slug = this.$route.params.slug || 'index'
 
     console.log('await -- a')
@@ -46,18 +47,26 @@ export default {
         this.error({ statusCode: 404, message: 'Page not found' })
       })
     console.log('await -- b')
+    this.processData('await', this.page)
+    console.log('await -- c')
 
     console.log('promise -- a')
     this.$content(slug)
-      .fetch().then((response) => {
+      .fetch()
+      .then((response) => {
         console.log('promise -- b')
         this.page2 = response
+        this.processData('promise', this.page2)
       })
       .catch(() => {
         this.error({ statusCode: 404, message: 'Page not found' })
       })
     console.log('promise -- c')
-    console.log('====================')
+  },
+  methods: {
+    processData (key, page) {
+      console.log(key, page.title)
+    }
   }
 }
 </script>
