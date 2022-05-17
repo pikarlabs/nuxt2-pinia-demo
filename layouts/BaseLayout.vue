@@ -18,7 +18,7 @@
         <!-- show list of countries in footer except on country list -->
         <CountryList
           v-if="$route.path!=='/country'"
-          limit="12"
+          :limit="12"
           show-more-items
         />
         </div>

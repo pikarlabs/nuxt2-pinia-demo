@@ -18,7 +18,9 @@ export default {
       navs: [
         { label: 'Home', href: '/' },
         { label: 'About', href: '/about' },
-        { label: 'Countries', href: '/country' }
+        { label: 'Countries', href: '/country' },
+        { label: 'Hello', href: '/page/hello' },
+        { label: 'Getting Started', href: '/page/getting-started' }
       ]
     }
   }
