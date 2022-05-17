@@ -1,6 +1,6 @@
 <template>
   <div>
-    this is main content
+    <img class="img-fluid" src="/images/homepage.jpg"/>
   </div>
 </template>
 
