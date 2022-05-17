@@ -2,7 +2,8 @@ import { defineStore } from 'pinia'
 
 export const useCountryStore = defineStore('country', {
   state: () => ({
-    countries: []
+    countries: [],
+    loading: false
   }),
   actions: {
     findCountry (code) {

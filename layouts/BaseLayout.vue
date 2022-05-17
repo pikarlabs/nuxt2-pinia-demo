@@ -42,30 +42,39 @@
 </template>
 
 <script>
+import { mapState } from 'pinia'
 import { useCountryStore } from '~/store/country'
 
 export default {
   name: 'BaseLayout',
+  fetchOnServer: false,
   data () {
     return {
-      loading: false,
       countries: []
     }
+  },
+  computed: {
+    // https://pinia.vuejs.org/core-concepts/getters.html#with-setup
+    ...mapState(useCountryStore, ['loading'])
   },
   async fetch () {
     const store = useCountryStore()
 
-    this.loading = true
+    // update country state
+    store.$patch({
+      loading: true
+    })
+
     let allCountries = await this.$axios.$get('https://restcountries.com/v3.1/all')
     allCountries = allCountries.sort((a, b) => a.name.common > b.name.common) // sort by name
 
     // update country state
     store.$patch({
-      countries: allCountries
+      countries: allCountries,
+      loading: false
     })
 
     this.countries = allCountries.slice(0, 12) // load the first 12 countries
-    this.loading = false
   }
 }
 </script>
