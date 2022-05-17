@@ -6,7 +6,7 @@
 
 <script>
 export default {
-  name: 'CountriesPage',
+  name: 'CountryPage',
   layout: 'BaseLayout'
 }
 </script>

@@ -15,9 +15,25 @@
           <Nuxt/>
         </div>
 
-        <div class="card">
-          <div class="card-body">
-            this is after content
+        <!-- show list of countries in footer except on country list -->
+        <div class="bg-secondary p-4" v-if="$route.path !== '/country'">
+          <div v-if="loading" class="card">
+            <div class="card-body text-center">
+              loading data ....
+            </div>
+          </div>
+          <div class="row" v-if="!loading">
+            <div v-for="(item, key) in countries" :key="key" class="col-md-3">
+              <NuxtLink :to="`/country/${item.cca2}`" class="card mb-3">
+                <div class="card-body">
+                  <p class="mb-0 h5">{{item.name.common}}</p>
+                  <span class="text-muted">code : {{item.cca2}}</span>
+                </div>
+              </NuxtLink>
+            </div>
+            <div class="text-center">
+              <NuxtLink to="country" class="btn btn-lg btn-warning">See all countries</NuxtLink>
+            </div>
           </div>
         </div>
       </div>
@@ -27,6 +43,18 @@
 
 <script>
 export default {
-  name: 'BaseLayout'
+  name: 'BaseLayout',
+  data () {
+    return {
+      countries: [],
+      loading: false
+    }
+  },
+  async fetch () {
+    this.loading = true
+    const countries = await this.$axios.$get('https://restcountries.com/v3.1/all')
+    this.countries = countries.slice(0, 12) // show 12 country only
+    this.loading = false
+  }
 }
 </script>
