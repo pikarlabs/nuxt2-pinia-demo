@@ -16,7 +16,7 @@
         </div>
 
         <!-- show list of countries in footer except on country list -->
-        <div class="bg-secondary p-4" v-if="$route.path !== '/country'">
+        <div class="bg-dark p-4" v-if="$route.path !== '/country'">
           <div v-if="loading" class="card">
             <div class="card-body text-center">
               loading data ....
@@ -42,18 +42,29 @@
 </template>
 
 <script>
+import { useCountryStore } from '~/store/country'
+
 export default {
   name: 'BaseLayout',
   data () {
     return {
-      countries: [],
-      loading: false
+      loading: false,
+      countries: []
     }
   },
   async fetch () {
+    const store = useCountryStore()
+
     this.loading = true
-    const countries = await this.$axios.$get('https://restcountries.com/v3.1/all')
-    this.countries = countries.slice(0, 12) // show 12 country only
+    let allCountries = await this.$axios.$get('https://restcountries.com/v3.1/all')
+    allCountries = allCountries.sort((a, b) => a.name.common > b.name.common) // sort by name
+
+    // update country state
+    store.$patch({
+      countries: allCountries
+    })
+
+    this.countries = allCountries.slice(0, 12) // load the first 12 countries
     this.loading = false
   }
 }
