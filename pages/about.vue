@@ -1,12 +1,10 @@
 <template>
-  <div>
-    this is main content
-  </div>
+  <Tutorial/>
 </template>
 
 <script>
 export default {
-  name: 'IndexPage',
+  name: 'AboutPage',
   layout: 'BaseLayout'
 }
 </script>

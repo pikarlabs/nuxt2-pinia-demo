@@ -1,12 +1,12 @@
 <template>
   <div>
-    this is main content
+    this is countries page
   </div>
 </template>
 
 <script>
 export default {
-  name: 'IndexPage',
+  name: 'CountriesPage',
   layout: 'BaseLayout'
 }
 </script>
