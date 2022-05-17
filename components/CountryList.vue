@@ -13,6 +13,12 @@
             <span class="text-muted">code : {{item.cca2}}</span>
           </div>
         </NuxtLink>
+        <NuxtLink :to="`/countryy/${item.cca2}`" class="card mb-3">
+          <div class="card-body bg-warning">
+            <p class="mb-0 h5">{{item.name.common}}</p>
+            <span class="text-muted">code : {{item.cca2}}</span>
+          </div>
+        </NuxtLink>
       </div>
       <div v-if="showMoreItems" class="text-center">
         <NuxtLink to="country" class="btn btn-lg btn-dark">See all countries</NuxtLink>

@@ -59,8 +59,6 @@ export default {
       countries: allCountries,
       loading: false
     })
-
-    this.countries = allCountries.slice(0, 12) // load the first 12 countries
   }
 }
 </script>
